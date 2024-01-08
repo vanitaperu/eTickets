@@ -1,4 +1,5 @@
 using eTickets.Data;
+using eTickets.Data.Cart;
 using eTickets.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,7 +20,10 @@ builder.Services.AddScoped<ICinemasService, CinemasService>();
 builder.Services.AddScoped<IMoviesService, MoviesService>();
 
 
+builder.Services.AddSingleton<IHttpContextAccessor,HttpContextAccessor >();
+builder.Services.AddScoped(SC => ShoppingCart.GetShoppingCart(SC));
 
+builder.Services.AddSession();
 
 
 
@@ -38,6 +42,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 //Seed database
 AppDbInitializer.Seed(app);
