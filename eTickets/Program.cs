@@ -21,7 +21,7 @@ builder.Services.AddScoped<IMoviesService, MoviesService>();
 
 
 builder.Services.AddSingleton<IHttpContextAccessor,HttpContextAccessor >();
-builder.Services.AddScoped(SC => ShoppingCart.GetShoppingCart(SC));
+builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
 
 builder.Services.AddSession();
 
