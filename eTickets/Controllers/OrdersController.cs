@@ -1,6 +1,5 @@
 ﻿using eTickets.Data.Cart;
 using eTickets.Data.Services;
-
 using eTickets.Data.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,23 +16,22 @@ namespace eTickets.Controllers
     {
         private readonly IMoviesService _moviesService;
         private readonly ShoppingCart _shoppingCart;
-        
+        private readonly IOrdersService _ordersService;
 
-        public OrdersController(IMoviesService moviesService, ShoppingCart shoppingCart)
+        public OrdersController(IMoviesService moviesService, ShoppingCart shoppingCart, IOrdersService ordersService)
         {
             _moviesService = moviesService;
             _shoppingCart = shoppingCart;
-           
+            _ordersService = ordersService;
         }
 
-        //public async Task<IActionResult> Index()
-        //{
-        //    string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //    string userRole = User.FindFirstValue(ClaimTypes.Role);
+        public async Task<IActionResult> Index()
+        {
+            string userId = "";
 
-        //    var orders = await _ordersService.GetOrdersByUserIdAndRoleAsync(userId, userRole);
-        //    return View(orders);
-        //}
+            var orders = await _ordersService.GetOrdersByUserIdAsync(userId);
+            return View(orders);
+        }
 
         public IActionResult ShoppingCart()
         {
@@ -71,16 +69,16 @@ namespace eTickets.Controllers
             return RedirectToAction(nameof(ShoppingCart));
         }
 
-        //public async Task<IActionResult> CompleteOrder()
-        //{
-        //    var items = _shoppingCart.GetShoppingCartItems();
-        //    string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //    string userEmailAddress = User.FindFirstValue(ClaimTypes.Email);
+        public async Task<IActionResult> CompleteOrder()
+        {
+            var items = _shoppingCart.GetShoppingCartItems();
+            string userId = "";
+            string userEmailAddress = "";
 
-        //    await _ordersService.StoreOrderAsync(items, userId, userEmailAddress);
-        //    await _shoppingCart.ClearShoppingCartAsync();
+            await _ordersService.StoreOrderAsync(items, userId, userEmailAddress);
+            await _shoppingCart.ClearShoppingCartAsync();
 
-        //    return View("OrderCompleted");
-        //}
+            return View("OrderCompleted");
+        }
     }
 }
