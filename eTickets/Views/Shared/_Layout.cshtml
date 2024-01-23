@@ -38,9 +38,10 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+       
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-controller="Movies" asp-action="Index" style="font-weight: bold;">eTickets</a>
+                <a class="navbar-brand" asp-controller="Movies" asp-action="Index" style="font-weight: bold;"><i class="bi bi-camera-reels-fill"></i>-</>eTickets</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -86,11 +87,32 @@
             @RenderBody()
         </main>
     </div>
-    <footer class="border-top footer text-muted">
+    <style>
+        .custom-light-blue-bg {
+            background-color: #2e90a6; /* Replace this hex color with your desired light green shade */
+        
+        }
+
+        
+    </style>
+
+    <footer class="border-top footer custom-light-blue-bg text-white">
+        <div class="container text-center">
+            Made with<i class="bi bi-heart-fill"></i>By Vanita
+            &copy; 2023 - e-Tickets -
+
+            <a href="#" target="_white" title="Twitter"><i class="bi bi-twitter"></i></a>
+            <a href="#" target="_blank" title="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" target="_blank" title="Instagram"><i class="bi bi-instagram"></i></a>
+        </div>
+    </footer>
+
+
+    @* <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 - eTickets
         </div>
-    </footer>
+    </footer> *@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
