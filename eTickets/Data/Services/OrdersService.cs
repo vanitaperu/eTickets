@@ -17,15 +17,17 @@ namespace eTickets.Data.Services
 
         public async Task<List<Order>> GetOrdersByUserIdAndRoleAsync(string userId, string userRole)
         {
-            var orders = await _context.Orders.Include(n => n.OrderItems).ThenInclude(n => n.Movie).Include(n => n.User).ToListAsync();
+            IQueryable<Order> ordersQuery = _context.Orders.Include(n => n.OrderItems).ThenInclude(n => n.Movie).Include(n => n.User);
 
             if (userRole != "Admin")
             {
-                orders = orders.Where(n => n.UserId == userId).ToList();
+                ordersQuery = ordersQuery.Where(n => n.UserId == userId);
             }
 
+            var orders = await ordersQuery.ToListAsync();
             return orders;
         }
+
 
         public async Task StoreOrderAsync(List<ShoppingCartItem> items, string userId, string userEmailAddress)
         {
